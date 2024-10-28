@@ -1,0 +1,26 @@
+// Custom Variables
+
+$secondary-text-color: $medium-gray;
+$accent-color: $orange;
+$secondary-link-color: $light-blue;
+$border-color: $light-gray;
+$error-color: $red;
+$error-background-color: $light-yellow;
+$sold-out-color: $yellow;
+$box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.09);
+
+// Bootstrap Variable Overrides
+
+$body-color: $black;
+$body-bg: $off-white;
+$primary: $blue;
+$secondary: $dark-gray;
+$min-contrast-ratio: 4;
+$input-bg: white;
+
+// Import Bootstrap Styles
+
+@import "bootstrap";
+
+  
+  
