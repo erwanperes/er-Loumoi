@@ -1,0 +1,25 @@
+<div class="row justify-content-center mt-4">
+  <div class="col-md-6">
+	  <p id="notice"><%= notice %></p>
+	  
+	  <p>
+		<strong>Name:</strong>
+		<%= @item.name %>
+	  </p>
+	  
+	  <p>
+		<strong>Description:</strong>
+		<%= @item.description %>
+	  </p>
+	  
+	  <p>
+		<strong>Category:</strong>
+		<%= @item.category %>
+	  </p>
+	  
+	  <div class="shared-link mt-4">
+	  	<%= link_to 'Edit', edit_user_item_path(current_user, @item) %> |
+	  	<%= link_to 'Back', user_items_path(current_user) %>
+	  </div>
+  </div>
+</div>

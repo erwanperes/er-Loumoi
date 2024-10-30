@@ -26,7 +26,10 @@
 				<td class="d-flex justify-content-between">
 					<%= link_to 'Show', [current_user, item] %>
 					<%= link_to 'Edit', edit_user_item_path(current_user, item) %>
-				  <%= link_to 'Destroy', [current_user, item], method: :delete, data: { confirm: 'Are you sure?' } , class: 'text-danger fs-6' %>
+				  <%= link_to 'Destroy', [current_user, item], class: 'text-danger fs-6', data: {
+					  turbo_method: :delete,
+					  turbo_confirm: "Are you sure?"
+					}  %>
 			  </td>
 			  </tr>
 		  <% end %>
@@ -34,4 +37,3 @@
 	  </table>
   </div>
 </div>
-
