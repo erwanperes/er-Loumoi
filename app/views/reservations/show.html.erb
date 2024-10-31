@@ -1,0 +1,80 @@
+<div class="container mt-4">
+  <% if notice %>
+	<div class="alert alert-success" role="alert">
+	  <%= notice %>
+	</div>
+  <% end %>
+
+  <div class="row justify-content-center">
+	<div class="col-md-8">
+	  <div class="card">
+		<div class="card-header bg-primary text-white">
+		  <h1 class="h4 mb-0">Booking details</h1>
+		</div>
+		
+		<div class="card-body">
+		  <!-- Information sur l'item -->
+		  <div class="mb-4">
+			<h3 class="h5">Reserved item</h3>
+			<dl class="row">
+			  <dt class="col-sm-3">Name</dt>
+			  <dd class="col-sm-9"><%= @reservation.item.name %></dd>
+
+			  <dt class="col-sm-3">Description</dt>
+			  <dd class="col-sm-9"><%= @reservation.item.description %></dd>
+
+			  <dt class="col-sm-3">Category</dt>
+			  <dd class="col-sm-9"><%= @reservation.item.category %></dd>
+			</dl>
+		  </div>
+
+		  <!-- Dates de réservation -->
+		  <div class="mb-4">
+			<h3 class="h5">Booking period</h3>
+			<dl class="row">
+			  <dt class="col-sm-3">Start date</dt>
+			  <dd class="col-sm-9"><%= @reservation.start_date.strftime("%d/%m/%Y") %></dd>
+
+			  <dt class="col-sm-3">End date</dt>
+			  <dd class="col-sm-9"><%= @reservation.end_date.strftime("%d/%m/%Y") %></dd>
+			</dl>
+		  </div>
+
+		  <!-- Statut -->
+		  <div class="mb-4">
+			<h3 class="h5">Status</h3>
+			<span class="badge <%= case @reservation.status
+			  when 'pending' then 'bg-warning'
+			  when 'approved' then 'bg-success'
+			  when 'rejected' then 'bg-danger'
+			  when 'active' then 'bg-primary'
+			  when 'returned' then 'bg-secondary'
+			  end %>">
+			  <%= @reservation.status %>
+			</span>
+		  </div>
+
+		  <!-- Actions -->
+		  <div class="mt-4">
+			<% if @reservation.item.user == current_user && @reservation.pending? %>
+			  <div class="btn-group mb-3">
+				<%= button_to 'Approuver', 
+					approve_reservation_path(@reservation),
+					method: :post,
+					class: 'btn btn-success me-2' %>
+				<%= button_to 'Refuser',
+					reject_reservation_path(@reservation),
+					method: :post,
+					class: 'btn btn-danger' %>
+			  </div>
+			<% end %>
+
+			<div>
+			  <%= link_to 'Back', reservations_path, class: 'btn btn-outline-primary' %>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>

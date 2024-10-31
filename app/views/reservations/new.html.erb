@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+	<div class="col-md-8">
+	  <div class="card">
+		<div class="card-header bg-primary text-white">
+		  <h1 class="h4 mb-0">Nouvelle réservation</h1>
+		</div>
+		
+		<div class="card-body">
+		  <%# Détails de l'item %>
+		  <div class="mb-4">
+			<h3 class="h5 card-title">Détails de l'item</h3>
+			<dl class="row">
+			  <dt class="col-sm-3">Nom</dt>
+			  <dd class="col-sm-9"><%= @item.name %></dd>
+
+			  <dt class="col-sm-3">Description</dt>
+			  <dd class="col-sm-9"><%= @item.description %></dd>
+
+			  <dt class="col-sm-3">Catégorie</dt>
+			  <dd class="col-sm-9"><%= @item.category %></dd>
+
+			  <dt class="col-sm-3">Propriétaire</dt>
+			  <dd class="col-sm-9">
+				<%= "#{@item.user.first_name} #{@item.user.last_name}" %>
+			  </dd>
+			</dl>
+		  </div>
+
+		  <div class="border-top pt-4">
+			<%= render 'form', item: @item, reservation: @reservation %>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>

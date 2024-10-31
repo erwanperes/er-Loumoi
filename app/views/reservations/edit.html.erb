@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+	<div class="col-md-8">
+	  <div class="card">
+		<div class="card-header bg-primary text-white">
+		  <h1 class="h4 mb-0">Modifier la réservation</h1>
+		</div>
+		
+		<div class="card-body">
+		  <%# Détails de l'item %>
+		  <div class="mb-4">
+			<h3 class="h5 card-title">Détails de l'item</h3>
+			<dl class="row">
+			  <dt class="col-sm-3">Nom</dt>
+			  <dd class="col-sm-9"><%= @reservation.item.name %></dd>
+
+			  <dt class="col-sm-3">Description</dt>
+			  <dd class="col-sm-9"><%= @reservation.item.description %></dd>
+
+			  <dt class="col-sm-3">Statut actuel</dt>
+			  <dd class="col-sm-9">
+				<span class="badge <%= case @reservation.status
+				  when 'pending' then 'bg-warning'
+				  when 'approved' then 'bg-success'
+				  when 'rejected' then 'bg-danger'
+				  when 'active' then 'bg-primary'
+				  when 'returned' then 'bg-secondary'
+				  end %>">
+				  <%= @reservation.status %>
+				</span>
+			  </dd>
+			</dl>
+		  </div>
+
+		  <div class="border-top pt-4">
+			<%= render 'form', item: @reservation.item, reservation: @reservation %>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>

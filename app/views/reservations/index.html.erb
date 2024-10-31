@@ -1,0 +1,116 @@
+<!-- app/views/reservations/index.html.erb -->
+<div class="container mt-4">
+  <% if notice %>
+	<div class="alert alert-success" role="alert">
+	  <%= notice %>
+	</div>
+  <% end %>
+
+  <h1 class="mb-4">My Reservations</h1>
+
+  <!-- Réservations que j'ai faites -->
+  <div class="card mb-4">
+	<div class="card-header bg-primary text-white">
+	  <h2 class="h5 mb-0">Bookings I have made</h2>
+	</div>
+	<div class="card-body">
+	  <div class="table-responsive">
+		<table class="table table-striped">
+		  <thead>
+			<tr>
+			  <th>Item</th>
+			  <th>Owner</th>
+			  <th>Dates</th>
+			  <th>Status</th>
+			  <th>Actions</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<% @borrowed_reservations.each do |reservation| %>
+			  <tr>
+				<td style="width: 200px;"><%= reservation.item.name %></td>
+				<td><%= "#{reservation.item.user.first_name} #{reservation.item.user.last_name}" %></td>
+				<td>
+				  Du <%= reservation.start_date.strftime("%d/%m/%Y") %><br>
+				  Au <%= reservation.end_date.strftime("%d/%m/%Y") %>
+				</td>
+				<td>
+				  <span class="badge <%= case reservation.status
+					when 'pending' then 'bg-warning'
+					when 'approved' then 'bg-success'
+					when 'rejected' then 'bg-danger'
+					when 'active' then 'bg-primary'
+					when 'returned' then 'bg-secondary'
+					end %>">
+					<%= reservation.status %>
+				  </span>
+				</td>
+				<td>
+				  <%= link_to 'See', reservation_path(reservation), class: 'btn btn-sm btn-outline-primary' %>
+				</td>
+			  </tr>
+			<% end %>
+		  </tbody>
+		</table>
+	  </div>
+	</div>
+  </div>
+
+  <!-- Réservations de mes items -->
+  <div class="card">
+	<div class="card-header bg-success text-white">
+	  <h2 class="h5 mb-0">Booking requests for my items</h2>
+	</div>
+	<div class="card-body">
+	  <div class="table-responsive">
+		<table class="table table-striped">
+		  <thead>
+			<tr>
+			  <th>Item</th>
+			  <th>Borrower</th>
+			  <th>Dates</th>
+			  <th>Status</th>
+			  <th>Actions</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<% @lent_reservations.each do |reservation| %>
+			  <tr>
+				<td style="width: 200px;"><%= reservation.item.name %></td>
+				<td><%= "#{reservation.borrower.first_name} #{reservation.borrower.last_name}" %></td>
+				<td>
+				  Du <%= reservation.start_date.strftime("%d/%m/%Y") %><br>
+				  Au <%= reservation.end_date.strftime("%d/%m/%Y") %>
+				</td>
+				<td>
+				  <span class="badge <%= case reservation.status
+					when 'pending' then 'bg-warning'
+					when 'approved' then 'bg-success'
+					when 'rejected' then 'bg-danger'
+					when 'active' then 'bg-primary'
+					when 'returned' then 'bg-secondary'
+					end %>">
+					<%= reservation.status %>
+				  </span>
+				</td>
+				<td>
+				  <%= link_to 'See', reservation_path(reservation), class: 'btn btn-sm btn-outline-primary' %>
+				  <% if reservation.pending? %>
+					<%= button_to 'Approve', 
+						approve_reservation_path(reservation), 
+						method: :post, 
+						class: 'btn btn-sm btn-success' %>
+					<%= button_to 'Refuse', 
+						reject_reservation_path(reservation), 
+						method: :post, 
+						class: 'btn btn-sm btn-danger' %>
+				  <% end %>
+				</td>
+			  </tr>
+			<% end %>
+		  </tbody>
+		</table>
+	  </div>
+	</div>
+  </div>
+</div>
