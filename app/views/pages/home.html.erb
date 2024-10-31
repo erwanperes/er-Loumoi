@@ -1,7 +1,7 @@
 <div class="row justify-content-center mt-4">
   <div class="col-md-8">
 	  
-	  <table class="table table-striped mt-4">
+	  <!-- <table class="table table-striped mt-4">
 		<thead>
 		  <tr>
 			<th scope="col">Name</th>
@@ -14,12 +14,33 @@
 		  <% @items.each do |item| %>
 			  <tr>
 				<th scope="row"><%= item.name %></th>
-				<td><%= item.description %></td>
+				<td><%= item.name %></td>
 				<td><%= item.category %></td>
 				<td><%= item.user.first_name %> <%= item.user.last_name %></td> 
 			  </tr>
 		  <% end %>
 		</tbody>
-	  </table>
+	  </table> -->
+	  
+	  <div class="row row-cols-1 row-cols-md-2 g-4">
+		<% @items.each do |item| %>
+			<div class="col">
+		  	<div class="card">
+				<div class="card-body">
+			  	<h5 class="card-title"><%= item.name %></h5>
+			  	<h6 class="card-subtitle mb-2 text-muted">Description</h6>
+			  	<p class="card-text"><%= item.description %></p>
+				<div class="card-links">
+					<a href="#" class="card-link"><%= item.category %></a>
+					<a href="#" class="card-link small"><%= item.user.first_name %> <%= item.user.last_name %></a>
+				</div>
+				</div>
+		  	</div>
+			</div>
+		<% end %>
+	  </div>
   </div>
+  <!-- style="width: 18rem;" -->
 </div>
+
+
